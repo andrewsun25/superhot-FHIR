@@ -60,7 +60,7 @@ function get_path(str_md5) {
     //console.log(LOG_TAG_FUNC.replace('{message}', ''));
 
     var _str_file_path = str_md5.replace('"', '');
-    var _str_new_file_path = PATH.join(__dirname, '/public/file');
+    var _str_new_file_path = PATH.join(__dirname,'../', '/public/file');
     while (_str_file_path.length > 0) {
         _str_new_file_path = PATH.join(_str_new_file_path, _str_file_path.substring(0, 2));
         _str_file_path = _str_file_path.substring(2, _str_file_path.length);
@@ -103,14 +103,16 @@ function mkdirsSync(dirpath, mode) {
 };
 
 module.exports = function(router) {
-   // console.log(router);
+     //console.log(router);
  //   var LOG_TAG_FUNC = LOG_TAG_FILE.replace('{method}', 'module.exports(router)');
     //console.log(LOG_TAG_FUNC.replace('{message}', ''));
     //console.log(PATH.join(__dirname, '/public/file/temp'))
     router.post('/upload', function(request, response) {
-    	var form = new MULTIPARTY.Form({uploadDir : PATH.join(__dirname, '/public/file/temp')});
+       
+    	var form = new MULTIPARTY.Form({uploadDir : PATH.join(__dirname, '../','/public/file/temp')});
         form.parse(request, function(error, fields, data) {
         	if (error) {
+                console.log(router);
                 console.log(error)
                 return;
             }
