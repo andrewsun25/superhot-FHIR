@@ -3,6 +3,7 @@ var FILE = require('fs');
 var CRYPTO = require('crypto');
 var PATH = require('path');
 var OS = require('os');
+var fileExtensionParser = require("../convertor/fileExtensionParser");
 
 function getMd5ByFile(file_input, callback, str_encrypt_encoding) {
   //  var LOG_TAG_FUNC = LOG_TAG_FILE.replace('{method}', 'exports.getMd5ByFile = function (file_input, callback)');
@@ -112,7 +113,6 @@ module.exports = function(router) {
     	var form = new MULTIPARTY.Form({uploadDir : PATH.join(__dirname, '../','/public/file/temp')});
         form.parse(request, function(error, fields, data) {
         	if (error) {
-                console.log(router);
                 console.log(error)
                 return;
             }
@@ -141,15 +141,18 @@ module.exports = function(router) {
 	            _str_file_ext = obj_file.path.substring(obj_file.path.indexOf('.'), obj_file.path.length).toLowerCase();
 	        }
 	        var _str_file_size = obj_file.size;
+            /*
 	        if (!FILE.existsSync(PATH.join(_str_file_path, _str_file_name))) {
 	            if (!mkdirsSync(_str_file_path)) {
 	                FILE.unlinkSync(obj_file.path);
 	                console.log('创建目录失败!')
-                    //reject(RESULT_UTIL.result(1, '创建目录失败!'));
 	                return;
 	            }
 	            FILE.writeFileSync(PATH.join(_str_file_path, _str_file_name), FILE.readFileSync(obj_file.path));
-	        };
+                
+            };*/
+            console.log(obj_file.path);
+            fileExtensionParser(obj_file.path);
         });
     });
 };
