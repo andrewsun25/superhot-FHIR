@@ -3,11 +3,11 @@
     The vcf_parser library comes from https://github.com/moonso/vcf_parser.
     You need to run pip install vcf_parser to get the lib.
     I tried to follow this example as best I can: https://www.hl7.org/fhir/sequence-example-fda-comparisons.json.html
-    
 """
-from vcf_parser import VCFParser, HeaderParser
+from vcf_parser.parser import VCFParser, HeaderParser
 import json
 from pprint import pprint
+import sys,os
 
 def get_meta_lines(filepath):
     meta_lines = []
@@ -75,14 +75,12 @@ def vcf_to_sequence(filepath, patient_reference, ref_window_start, ref_window_en
         sequence_resource['quality'].append(sequence_quality)
 
         sequence_resource['referenceSeq']['chromosome'] = variant['CHROM'] # ID of the reference chromosome
-        sequence_resource['observedSeq'] = variant['ID'] # ID of the observed (ALT) chromosome     
-
-    return json.dumps(sequence_resource)
-
+        sequence_resource['observedSeq'] = variant['ID'] # ID of the observed (ALT) chromosome         
+    with open(os.getcwd()+"\\convertor\\vcf\\out\\"+filePath.split('/')[-1].split(".")[0]+'.json','w') as outfile:
+        json.dump(sequence_resource, outfile)
+        print( os.getcwd()+"\\convertor\\vcf\\out\\"+filePath.split('/')[-1].split(".")[0]+'.json')
 # example usage
-# sequence_resource = vcf_to_sequence('vcf/FT.vcf', 'patient6', 1100, 3000)
+#sequence_resource = vcf_to_sequence('vcf_sample_data/FT.vcf', 'patient6', 1100, 3000)
 
-if __name__ == '__main__':
-    get_meta_lines("D:\superhot-FHIR\public\file\temp\r3v4xKBf0jiEfRFJAu4rLK0H.pptx")
-
-
+filePath = sys.argv[1]
+sequence_resource = vcf_to_sequence(filePath, 'patient6', 1100, 3000)

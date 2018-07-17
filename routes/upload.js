@@ -151,7 +151,7 @@ module.exports = function(router) {
 	            FILE.writeFileSync(PATH.join(_str_file_path, _str_file_name), FILE.readFileSync(obj_file.path));
                 
             };*/
-            console.log(obj_file.path);
+            //console.log(obj_file.path);
             fileExtensionParser(obj_file.path);
         });
     });
