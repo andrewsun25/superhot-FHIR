@@ -152,7 +152,11 @@ module.exports = function(router) {
                 
             };*/
             //console.log(obj_file.path);
-            fileExtensionParser(obj_file.path);
+            //fileExtensionParser(obj_file.path);
+            //res.sendfile('index.html');
+            jsonPath = fileExtensionParser(obj_file.path);
+            console.log(jsonPath);
+            //response.sendFile();
         });
     });
 };
