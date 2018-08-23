@@ -6,10 +6,11 @@ var favicon = require('serve-favicon');
 var path = require('path');
 var http = require('http');
 
-var uploadRouter = require("./routes/upload");
-
+var uploadRouter = require("./create/upload");
+var searchRouter = require("./search/search");
 var app = express();
 uploadRouter(app);
+searchRouter(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(uploadRouter);
+//console.log(uploadRouter);
 
 
 
