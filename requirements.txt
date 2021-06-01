@@ -202,7 +202,7 @@ traitlets==4.3.2
 tushare==1.1.7
 typing==3.6.2
 unicodecsv==0.14.1
-urllib3==1.22
+urllib3==1.26.5
 vcf-parser==1.6
 wcwidth==0.1.7
 webencodings==0.5.1
